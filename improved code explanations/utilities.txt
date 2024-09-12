@@ -1,0 +1,7 @@
+Explanation of Comments:
+Better error handling: Highlighted where exceptions are added to handle specific error cases, improving the resilience of the code.
+Code readability: Indicated improvements made by replacing repetitive code with more structured and optimized approaches.
+Logging consistency: Explained how the log messages have been standardized across the codebase to ensure clarity in both success and error scenarios.
+DRY principle: Identified areas where redundancy was removed by utilizing functions or dictionaries to simplify code.
+Type hinting: Explained the use of type hints to improve readability and maintenance.
+General improvements: Replaced hardcoded paths with environment variables (VOL_PATH) for flexibility.

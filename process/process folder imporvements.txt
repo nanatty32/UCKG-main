@@ -1,0 +1,47 @@
+#improved_ontology_updater
+Key Changes Explained:
+Logging Consistency: The logging format provides detailed information such as the timestamp, logger name, log level, and message. This helps with debugging and understanding where the logs are generated.
+
+Error Handling: A try-except block is used to capture and log any exceptions that occur during the ontology update process, ensuring graceful error handling and useful logs in case of failure.
+
+Use of Environment Variables: File paths for the ontology, extended ontology, and volume directory are read from environment variables, making the script more flexible and easier to configure across different environments.
+
+Ontology Conversion: The script reads ontologies in Turtle format, serializes them to OWL XML format, and then later converts them back to Turtle format after adding instances. The process is clearly logged at each stage.
+
+File Cleanup: After completing the operations, intermediate OWL files (uco.owl, uco_with_instances.owl) are deleted to save space and prevent clutter.
+
+Reasoner Synchronization: The sync_reasoner() function is called to ensure that the ontology's reasoning is consistent after loading instances.
+
+Return Values: The function returns True for success and False for failure, which can be useful for further handling outside the function.
+
+
+##########impeoved_graph_updater.py
+Explanation of Changes:
+Better error handling: Exception handling is improved with more detailed and helpful error messages, especially in file loading and database operations.
+Logging consistency: All log messages are structured consistently across functions, providing better insight and traceability for success and failure points.
+DRY principle: Repetitive code (like constraint creation or handling different operations) is abstracted into reusable functions, reducing redundancy.
+Environment variables: Hardcoded paths (e.g., UCO_ONTO_PATH, ROOT_FOLDER, VOL_PATH) are replaced by environment variables for better flexibility and easier configuration management.
+Type hinting: Type hints are added to enhance code readability and improve maintenance by making the function signatures clearer.
+
+
+###improved_shared_functions.py
+Logging: Logging is configured at the beginning with a specific format and level (INFO), making debugging and status tracking easier.
+
+Environment Variables: Paths are fetched from environment variables (UCO_ONTO_PATH, ROOT_FOLDER, VOL_PATH), allowing the script to be run in different environments without hardcoding paths.
+
+Ontology and Graph Update: The script imports and calls custom ontology (ontology_updater) and graph updater (graph_updater) modules to handle ontology and graph updates. If the ontology update succeeds, the graph is updated.
+
+File Hashing: The function calculate_file_hash calculates the SHA-256 hash of any file, ensuring data integrity and providing a mechanism for verifying file changes.
+
+Datetime Formatting: format_datetime_string formats datetime strings to include milliseconds with precision, ensuring compatibility in systems requiring specific datetime formats.
+
+Mapper Tool: The call_mapper_update function constructs a command to run a Java JAR for RML mapping based on the specified data source (cve, cwe, cpe, etc.) and outputs the results to a Turtle (.ttl) file.
+
+Database and File Status Check: The function check_status checks the status of specific files or database entries (like cve, d3fend, attack, etc.) before further processing. For CVE, it checks if the cve_meta table exists in the SQLite database and if initialization is complete.
+
+Command-line Arguments: The script can take command-line arguments to specify which data source to update (cve_init, cve_update). If no argument is provided, it prompts the user to pass one.
+
+#########xml_parse_improved.py
+Error Handling: The script catches XML parsing errors (ET.ParseError) and file not found errors (FileNotFoundError).
+File Existence Check: Before attempting to parse the XML file, the script checks whether the file exists.
+Cleaner JSON Construction: The list comprehension simplifies the construction of the cwes JSON object.
